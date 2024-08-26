@@ -1,0 +1,187 @@
+.control-row {
+  align-items: flex-end;
+}
+
+.control {
+  flex: 1;
+}
+
+button {
+  padding: 0.6rem 1.75rem;
+}
+section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(/assets/background-wallpaper.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header h1 {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  margin: 1rem 0;
+  letter-spacing: 0.2rem;
+  color: #2f4444;
+}
+
+form {
+  width: 90%;
+  max-width: 40rem;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgb(255, 255, 255), #f6ffffe8);
+  border-radius: 8px;
+  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+}
+
+.control,
+fieldset {
+  margin: 0.5rem 0;
+}
+
+.control.no-margin {
+  margin-bottom: 0;
+}
+
+.control label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  color: #9bafaf;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.control input {
+  display: block;
+  width: 100%;
+  max-width: 15rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #758a8a;
+  background-color: #869999;
+  color: #142020;
+}
+
+.control select {
+  display: block;
+  width: 100%;
+  max-width: 15rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #758a8a;
+  background-color: #869999;
+  color: #142020;
+}
+
+.control:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+}
+
+.control:has(input[type="checkbox"]) label {
+  margin: 0;
+}
+
+.control input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+  max-width: none;
+  margin-right: 0.5rem;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  color: #d9e2f1;
+}
+
+.control-error {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: #0b2181;
+  height: 0.5rem;
+  padding: 0.25rem 0 0 0;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.control-error p {
+  margin: 0;
+}
+
+.control-row {
+  margin: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.control-row .control {
+  flex: 1;
+}
+
+hr {
+  margin: 1.5rem 0;
+  border: 1px solid #147b73;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #2b4bb4;
+  color: #d9e2f1;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #1713da;
+}
+
+.button-flat {
+  background-color: transparent;
+  color: #9cbaba;
+}
+
+.button-flat:hover,
+.button-flat:focus {
+  background-color: transparent;
+  color: #869999;
+}
+
+.control:has(.ng-invalid.ng-touched.ng-dirty) label {
+  color: #527df3;
+}
+
+input.ng-invalid.ng-touched.ng-dirty {
+  background-color: #5f98ee;
+  border-color: #031961;
+}
+.button-section{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.text{
+  margin-right: 2.4rem;
+}
+.no-margin{
+  margin: 0;
+  padding: 0;
+}

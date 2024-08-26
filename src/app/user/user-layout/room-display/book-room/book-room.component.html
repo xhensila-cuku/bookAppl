@@ -1,0 +1,90 @@
+<div class="background-photo">
+  <app-nav-bar />
+</div>
+@if (isFetching()) {
+<div class="d-flex justify-content-center m-5">
+  <div class="spinner-border" role="status">
+    <!-- <span class="sr-only">Loading...</span> -->
+  </div>
+</div>
+} @else {
+
+<div>
+  <div class="content">
+    <h2>{{ room?.name }}</h2>
+    <div class="image">
+      <!-- @if(room && room.image){ -->
+      <img [src]="'data:image/jpeg;base64,' + room?.image" />
+      <!-- }@else { -->
+      <!-- <img src="./../../../../../assets/room-default-photo.jpg" /> -->
+      <!-- } -->
+
+      <div>
+        <p class="text-room">
+          Great choice for a relaxing vacation for families with children .Also
+          a perfect choice for honeymooners and couples. This huge
+          {{ room?.name }} features one queen-size bed and has in total a number
+          of<strong> {{ room?.numberOfBeds }} beds</strong>.<br />
+          {{ room?.description }}
+          In-room safe is available for your convenience as well. The bathroom
+          is equipped with a bathtub or shower, ground floor tiles and
+          hairdryer. Smoking in rooms is allowed.
+        </p>
+        <p class="text-room">
+          Amenities: @for (item of room?.amenities; track item) {
+          <span class="text-line"> {{ getAmenityName(item) }} /</span>
+          }
+        </p>
+
+        <div class="book-button-box">
+          <p class="text-room text-rooms padding m-0">
+            Price:
+            <span class="text-lines">
+              <strong>{{ room?.price }}$ </strong>/per night</span
+            >
+          </p>
+        </div>
+
+        <button class="book-now padding btn-back" (click)="onBook(room)">Book now</button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="position-booking-box"> -->
+    <!-- <div>
+      <h3>Mini-gallery</h3>
+      <img src="assets/hotel-1.jpg" />
+      <img src="assets/hotel-2.jpg" />
+      <img src="assets/hotel-3.jpg" />
+      <img src="assets/hotel-4.jpg" />
+  
+    </div> -->
+    <!-- <div class="booking-box" id="booking-box">
+      <h3>{{ room?.price }}$ /per night</h3>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="inputs">
+          <label for="check-in">Check in</label>
+          <input
+            id="check-in"
+            type="date"
+            required
+            formControlName="checkIn"
+            [min]="today"
+          />
+        </div>
+        <div class="inputs">
+          <label for="check-out">Check out</label>
+          <input
+            id="check-out"
+            type="date"
+            [min]="form.value.checkIn || today"
+            required
+            formControlName="checkOut"
+          />
+        </div>
+        <div><button class="button-book" type="submit">Add</button></div>
+      </form>
+    </div> -->
+  <!-- </div> -->
+</div>
+
+}

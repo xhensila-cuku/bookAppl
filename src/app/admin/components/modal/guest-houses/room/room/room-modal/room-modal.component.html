@@ -1,0 +1,95 @@
+<div class="backdrop">
+  <div class="alert-box">
+    <div class="to-end">
+      <button class="btn" (click)="close()"><mat-icon>clear</mat-icon></button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="simple-form">
+      <p>
+        <label for="name">Name</label>
+        <input type="text" id="title" name="name" formControlName="name" />
+        @if(form.controls.name.invalid && form.controls.name.touched){
+        <span class=" alert-danger alert">This field is required</span>
+        }
+      </p>
+
+      <p>
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          rows="3"
+          name="description"
+          formControlName="description"
+        ></textarea>
+        @if(form.controls.description.invalid && form.controls.description.touched){
+          <span class="alert-danger alert">This field is required</span>
+          }
+      </p>
+      <p>
+        <label for="image">Image</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          (change)="onFileChange($event)"
+        />
+        @if(form.controls.image.invalid && form.controls.image.touched){
+          <span class="alert-danger alert">This field is required</span>
+          }
+      </p>
+      <div class="same-row">
+        <p>
+          <label for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            formControlName="price"
+          />
+          @if(form.controls.price.invalid && form.controls.price.touched){
+            <span class="alert-danger alert">This field is required</span>
+            }
+        </p>
+        <p class="with-margin">
+          <label for="numberOfBeds">No of beds</label>
+          <input
+            type="number"
+            id="numberOfBeds"
+            name="numberOfBeds"
+            formControlName="numberOfBeds"
+          />
+          @if(form.controls.numberOfBeds.invalid && form.controls.numberOfBeds.touched){
+            <span class="text-muted danger">This field is required</span>
+            }
+        </p>
+        <p>
+          <label for="guestHouseId">GuestHouse Id</label>
+          <input
+            type="string"
+            readonly
+            id="guestHouseId"
+            name="guestHouseId"
+            formControlName="guestHouseId"
+          />
+        </p>
+      </div>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Ameneties</mat-label>
+          <mat-select [panelClass]="'custom-panel'" formControlName="amenities" multiple class="selection">
+            @for(item of types; track item){
+            <mat-option [value]="item" class="options">{{ item }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <div class="buttons">
+        <div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

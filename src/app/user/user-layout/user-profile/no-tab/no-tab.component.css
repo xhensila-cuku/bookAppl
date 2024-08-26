@@ -1,0 +1,7 @@
+.header{
+    min-width: 70vw;
+}
+.header p{
+    font-size: 1.6rem;
+    font-weight: 600;
+}

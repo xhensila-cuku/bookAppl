@@ -1,0 +1,60 @@
+<section class="nav-container">
+  <nav class="main-nav">
+    <div class="first-part">
+      <a class="main-link" (click)="onToggleDetails()">
+        <mat-icon class="icon">view_headline</mat-icon>
+      </a>
+      <ul class="main-nav-list">
+        <li>
+          <a class="main-nav-link">
+            <mat-icon class="icon">home</mat-icon>
+            @if (detailsVisible()) {
+            <span>Home</span>
+            }
+          </a>
+        </li>
+       
+        <li>
+          <a class="main-nav-link" routerLink="guesthouses">
+            <mat-icon class="icon">add</mat-icon>
+            @if (detailsVisible()) {
+            <span>GuestHouses <mat-icon class="no-fill">home</mat-icon></span>
+            }
+          </a>
+          <!-- <a class="main-nav-link" routerLink="rooms">
+            <mat-icon class="icon">edit</mat-icon>
+            @if (detailsVisible()) {
+            <span>Rooms</span>
+            }
+          </a> -->
+          <a class="main-nav-link" routerLink="users">
+            <mat-icon class="icon">people</mat-icon>
+            @if (detailsVisible()) {
+            <span>Users</span>
+            }
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="second-part">
+      <ul>
+        <!-- <li>
+          <a class="main-nav-link link-to-end">
+            <mat-icon class="icon">person</mat-icon>
+            @if (detailsVisible()) {
+            <span>Admin Profile</span>
+            }
+          </a>
+        </li> -->
+        <li>
+          <a class="main-nav-link" (click)="logOut()">
+            <mat-icon class="icon">logout</mat-icon>
+            @if (detailsVisible()) {
+            <span>Log out</span>
+            }
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</section>

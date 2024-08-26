@@ -1,0 +1,17 @@
+.contents {
+  display: flex;
+  flex-direction: column;
+}
+.first-content {
+  /* width: 100vw; */
+  background-color: #e5e4e2;
+}
+.second-content {
+  display: flex;
+}
+.fit-content-width {
+  width: -webkit-fill-available;
+}
+.fit-max-content-width {
+  min-width: max-content;
+}
