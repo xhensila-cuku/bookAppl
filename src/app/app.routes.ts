@@ -16,13 +16,15 @@ import { PersonalDetailsComponent } from './user/user-layout/user-profile/person
 import { BookingsComponent } from './user/user-layout/user-profile/bookings/bookings.component';
 import { NoTabComponent } from './user/user-layout/user-profile/no-tab/no-tab.component';
 import { HomeComponent } from './admin/components/home/home.component';
+import { AdminGuard } from './admin/admin.guard';
+import { NoAuthGuard } from './services/no-auth.guard';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', canActivate: [NoAuthGuard], component: LoginComponent },
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { roles: ['Admin'] },
     children: [
       {
@@ -51,19 +53,27 @@ export const routes: Routes = [
   },
   {
     path: 'page/all-guesthouses',
+    canActivate: [AuthGuard],
+
     component: AllGuesthousesComponent,
   },
   {
     path: 'page/room-display/:guestHouseId',
+    canActivate: [AuthGuard],
+
     component: RoomDisplayComponent,
   },
   {
     path: 'page/book/:roomId',
+    canActivate: [AuthGuard],
+
     component: BookRoomComponent,
   },
   {
     path: 'page/my-profile',
     component: UserProfileComponent,
+    canActivate: [AuthGuard],
+
     children: [
       {
         path: '',
@@ -81,9 +91,9 @@ export const routes: Routes = [
   },
   {
     path: 'register',
+    canActivate: [NoAuthGuard],
     component: RegisterComponent,
   },
 
   { path: '**', redirectTo: '/login' },
 ];
-

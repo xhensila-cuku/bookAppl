@@ -63,5 +63,7 @@ export class AuthService {
   isUser(): boolean {
     return this.checkUserRole('User');
   }
+  getMainPageForUser() {
+    return this.isAdmin() ? '/admin' : '/page';
+  }
 }
-
