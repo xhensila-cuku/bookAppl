@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './log-in/log-in.component';
+import { LoginComponent } from './page/log-in/log-in.component';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AdminComponent } from './admin/admin.component';
-import { HeaderComponent } from './admin/pagelayout/header/header.component';
-import { SidebarComponent } from './admin/pagelayout/header/sidebar/sidebar.component';
-import { GuestHousesComponent } from './admin/components/modal/guest-houses/guest-houses.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { HeaderComponent } from './role/admin/layout/header/header.component';
+import { SidebarComponent } from './role/admin/layout/side-bar/side-bar.component';
+import { GuestHousesComponent } from './role/admin/layout/content/guesthouses/guesthouses.component';
+import { AdminComponent } from './role/admin/admin.component';
 
 @Component({
   selector: 'app-root',

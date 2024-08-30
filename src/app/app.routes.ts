@@ -1,98 +1,141 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { LoginComponent } from './log-in/log-in.component';
-import { AuthGuard } from './services/auth.guard';
-import { UserComponent } from './user/user.component';
-import { RegisterComponent } from './register/register.component';
-import { GuestHousesComponent } from './admin/components/modal/guest-houses/guest-houses.component';
-import { RoomComponent } from './admin/components/modal/guest-houses/room/room/room.component';
-import { UsersComponent } from './admin/components/users/users.component';
-import { AllGuesthousesComponent } from './user/user-layout/top-five/all-guesthouses/all-guesthouses.component';
-import { RoomDisplayComponent } from './user/user-layout/room-display/room-display.component';
-import { BookRoomComponent } from './user/user-layout/room-display/book-room/book-room.component';
-import { UserProfileComponent } from './user/user-layout/user-profile/user-profile.component';
-import { PersonalDetailsComponent } from './user/user-layout/user-profile/personal-details/personal-details.component';
-import { BookingsComponent } from './user/user-layout/user-profile/bookings/bookings.component';
-import { NoTabComponent } from './user/user-layout/user-profile/no-tab/no-tab.component';
-import { HomeComponent } from './admin/components/home/home.component';
-import { AdminGuard } from './admin/admin.guard';
-import { NoAuthGuard } from './services/no-auth.guard';
+import { LoginComponent } from './page/log-in/log-in.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { NoAuthGuard } from './guards/no-auth.guard';
+import { UserGuard } from './guards/user.guard';
+// import { BookingsComponent } from './user/user-layout/user-profile/bookings/bookings.component';
+// import { AdminComponent } from './admin/admin.component';
+// import { UserComponent } from './user/user.component';
+// import { RegisterComponent } from './register/register.component';
+// import { GuestHousesComponent } from './admin/components/modal/guest-houses/guest-houses.component';
+// import { RoomComponent } from './admin/components/modal/guest-houses/room/room/room.component';
+// import { UsersComponent } from './admin/components/users/users.component';
+// import { AllGuesthousesComponent } from './user/user-layout/top-five/all-guesthouses/all-guesthouses.component';
+// import { RoomDisplayComponent } from './user/user-layout/room-display/room-display.component';
+// import { BookRoomComponent } from './user/user-layout/room-display/book-room/book-room.component';
+// import { UserProfileComponent } from './user/user-layout/user-profile/user-profile.component';
+// import { PersonalDetailsComponent } from './user/user-layout/user-profile/personal-details/personal-details.component';
+// import { NoTabComponent } from './user/user-layout/user-profile/no-tab/no-tab.component';
 
 export const routes: Routes = [
   { path: 'login', canActivate: [NoAuthGuard], component: LoginComponent },
   {
     path: 'admin',
-    component: AdminComponent,
+    loadComponent: () =>
+      import('./role/admin/admin.component').then((x) => x.AdminComponent),
     canActivate: [AuthGuard, AdminGuard],
     data: { roles: ['Admin'] },
     children: [
       {
         path: '',
-        component: HomeComponent,
+        redirectTo: 'guesthouses',
+        pathMatch: 'full',
       },
       {
         path: 'guesthouses',
-        component: GuestHousesComponent,
+        loadComponent: () =>
+          import('./role/admin/layout/content/guesthouses/guesthouses.component').then(
+            (x) => x.GuestHousesComponent
+          ),
       },
       {
         path: 'room/:guesthouseId',
-        component: RoomComponent,
+        loadComponent: () =>
+          import(
+            './role/admin/layout/content/guesthouses/room/room.component'
+          ).then((x) => x.RoomComponent),
+        // component: RoomComponent,
       },
       {
         path: 'users',
-        component: UsersComponent,
+        loadComponent: () =>
+          import('./role/admin/layout/content/users/users.component').then(
+            (x) => x.UsersComponent
+          ),
+        // component: UsersComponent,
       },
     ],
   },
   {
     path: 'page',
-    component: UserComponent,
-    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./role/user/user.component').then((x) => x.UserComponent),
+    // component: UserComponent,
+    canActivate: [AuthGuard, UserGuard],
     data: { roles: ['User'] },
   },
   {
     path: 'page/all-guesthouses',
-    canActivate: [AuthGuard],
-
-    component: AllGuesthousesComponent,
+    canActivate: [AuthGuard, UserGuard],
+    loadComponent: () =>
+      import(
+        './role/user/user-layout/top-five/all-guesthouses/all-guesthouses.component'
+      ).then((x) => x.AllGuesthousesComponent),
+    // component: AllGuesthousesComponent,
   },
   {
     path: 'page/room-display/:guestHouseId',
-    canActivate: [AuthGuard],
-
-    component: RoomDisplayComponent,
+    canActivate: [AuthGuard, UserGuard],
+    loadComponent: () =>
+      import(
+        './role/user/user-layout/room-display/room-display.component'
+      ).then((x) => x.RoomDisplayComponent),
+    // component: RoomDisplayComponent,
   },
   {
     path: 'page/book/:roomId',
-    canActivate: [AuthGuard],
-
-    component: BookRoomComponent,
+    canActivate: [AuthGuard, UserGuard],
+    loadComponent: () =>
+      import(
+        './role/user/user-layout/room-display/book-room/book-room.component'
+      ).then((x) => x.BookRoomComponent),
+    // component: BookRoomComponent,
   },
   {
     path: 'page/my-profile',
-    component: UserProfileComponent,
-    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import(
+        './role/user/user-layout/user-profile/user-profile.component'
+      ).then((x) => x.UserProfileComponent),
+    // component: UserProfileComponent,
+    canActivate: [AuthGuard, UserGuard],
 
     children: [
       {
         path: '',
-        component: NoTabComponent,
+        loadComponent: () =>
+          import(
+            './role/user/user-layout/user-profile/no-tab/no-tab.component'
+          ).then((x) => x.NoTabComponent),
+        // component: NoTabComponent,
       },
       {
         path: 'personal-details',
-        component: PersonalDetailsComponent,
+        loadComponent: () =>
+          import(
+            './role/user/user-layout/user-profile/personal-details/personal-details.component'
+          ).then((x) => x.PersonalDetailsComponent),
+        // component: PersonalDetailsComponent,
       },
       {
         path: 'bookings',
-        component: BookingsComponent,
+        loadComponent: () =>
+          import(
+            './role/user/user-layout/user-profile/bookings/bookings.component'
+          ).then((x) => x.BookingsComponent),
+        // component: BookingsComponent,
       },
     ],
   },
   {
     path: 'register',
     canActivate: [NoAuthGuard],
-    component: RegisterComponent,
+    loadComponent: () =>
+      import('./page/register/register.component').then(
+        (x) => x.RegisterComponent
+      ),
+    // component: RegisterComponent,
   },
 
   { path: '**', redirectTo: '/login' },

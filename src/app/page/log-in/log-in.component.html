@@ -1,0 +1,56 @@
+<section>
+  @if (errorMessage) {
+  <app-alert-modal (close)="onHandleError()"></app-alert-modal>
+  }
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
+
+    <div class="control-row">
+      <div class="control no-margin">
+        <label for="email" class="form-labe">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="form-control"
+        />
+        @if(form.controls.email.invalid&& form.controls.email.touched){
+        <p class="text-danger">The entered email is ivalid</p>
+        }
+      </div>
+
+      <div class="control no-margin">
+        <label for="password" class="form-label">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="form-control"
+        />
+        @if(form.controls.password.invalid&& form.controls.password.touched){
+        <p class="text-danger">The entered password is ivalid</p>
+        }
+      </div>
+
+      <button class="button" >Login</button>
+      <div class="button-section">
+        <div class="text">
+          <p class="no-margin">
+            If you haven't visited this page before please switch to Register
+          </p>
+        </div>
+        <div>
+          <button class="button" (click)="OnRegister()">Register</button>
+        </div>
+      </div>
+    </div>
+    <!-- @if(emailIsInvalid){
+    <p class="control-error">Please enter a valid email address.</p>
+    } @if(passwordIsInvalid){
+    <p class="control-error">
+      Please enter a valid password-(it MUST contain min 6 characters and at
+      least one question mark).
+    </p>
+    } -->
+  </form>
+</section>

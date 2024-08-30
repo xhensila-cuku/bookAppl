@@ -1,0 +1,69 @@
+<!-- Loading Spinner -->
+
+<div class="personal-details">
+  <div class="table-details">
+    <div class="header padding">
+      <h3>Bookings</h3>
+      <span>Here you will find all the bookings you've made until today</span>
+    </div>
+  </div>
+
+  <div class="filter-buttons">
+    <div>
+      <button (click)="applyFilter('past')" class="btn btn-primary"  [ngClass]="{'active-filter': selectedFilter === 'past'}">
+        Past Bookings
+      </button>
+    </div>
+    <div>
+      <button (click)="applyFilter('today')" class="btn btn-primary"  [ngClass]="{'active-filter': selectedFilter === 'today'}">
+        Today's Bookings
+      </button>
+    </div>
+    <div>
+      <button (click)="applyFilter('upcoming')" class="btn btn-primary"  [ngClass]="{'active-filter': selectedFilter === 'upcoming'}">
+        Upcoming Bookings
+      </button>
+    </div>
+  </div>
+  @if (isFetching()) {
+
+  <div class="d-flex justify-content-center m-5">
+    <div class="spinner-border" role="status"></div>
+  </div>
+  }@else { @if (filteredBookings.length==0) {
+  <div>
+    <p>No bookings found for the selected category.</p>
+  </div>
+  } @for (item of filteredBookings; track item.id) {
+
+  <div class="table-details">
+    <table>
+      <tbody>
+        <tr>
+          <td>Room:</td>
+          <td>{{ item.room.name }}</td>
+        </tr>
+        <tr>
+          <td>Check in:</td>
+          <td>{{ item.bookFrom | date : "MM/dd/yy" }}</td>
+        </tr>
+        <tr>
+          <td>Check out:</td>
+          <td>{{ item.bookTo | date : "MM/dd/yy" }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="display-room">
+      <div class="text-container">
+        <h4>Room details:</h4>
+        <!-- <p>Name: {{ item.room.name }}</p> -->
+        <p>Number of beds: {{ item.room.numberOfBeds }}</p>
+        <p>Price: {{ item.room.price }}$ per night</p>
+      </div>
+      <div class="img-container">
+        <img [src]="'data:image/jpeg;base64,' + item.room.image" />
+      </div>
+    </div>
+  </div>
+  } }
+</div>

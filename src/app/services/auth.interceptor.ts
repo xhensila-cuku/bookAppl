@@ -1,7 +1,9 @@
 // import { HTTP_INTERCEPTORS, HttpInterceptorFn } from '@angular/common/http';
 // import { catchError, throwError } from 'rxjs';
 
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
   const token = localStorage.getItem('token');
@@ -14,8 +16,16 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
       },
     });
   }
-  return next(request);
+  return next(request).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        console.error('Unauthorized - possibly invalid token');
+      } 
+      return throwError(() => error);
+    })
+  );
 };
+  
 
 // export const httpInterceptorProviders = [
 // { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },

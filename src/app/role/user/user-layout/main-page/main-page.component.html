@@ -1,0 +1,114 @@
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 col-md-push-5">
+          <div class="booking-cta">
+            <h1>Live your dream</h1>
+            <p>
+              We bring you not only a stay option, but an experience in your
+              budget to enjoy the luxury. This application is the right choice
+              for visitors who are searching for a combination of charm and a
+              convenient position from where to explore surroundings
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 col-md-pull-7">
+          <div class="booking-form">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <span class="form-label">Your Destination</span>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Enter a destination or hotel name"
+                />
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Check In</span>
+                    <input
+                      class="form-control"
+                      type="date"
+                      required
+                      [min]="today"
+                      formControlName="bookFrom"
+                    />
+                    @if (form.controls.bookFrom.invalid &&
+                    form.controls.bookFrom.touched){
+                    <span class="text-danger">This field is required!</span>
+                    }
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Check out</span>
+                    <input
+                      class="form-control"
+                      type="date"
+                      required
+                      [min]="form.value.bookFrom || today"
+                      formControlName="bookTo"
+                    />
+                    @if (form.controls.bookTo.invalid &&
+                    form.controls.bookTo.touched){
+                    <div class="text-danger">This field is required!</div>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Number of Beds</span>
+                    <input
+                      class="form-control"
+                      type="number"
+                      required
+                      [max]="3"
+                      formControlName="numberOfBeds"
+                    />
+                    @if (form.controls.numberOfBeds.invalid &&
+                    form.controls.numberOfBeds.touched){
+                    <div class="text-danger">This field is required!</div>
+                    }
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-btn">
+                <button class="submit-btn" type="submit">
+                  Check availability
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (bookings.length>0) {
+
+<div class="container" #guesthouses>
+  <div class="main-heading">
+    <h2>Available Guesthouses</h2>
+  </div>
+  <div class="card-container">
+    @for (item of bookings; track item.id) {
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.description }} <br /></p>
+        <a class="details" [routerLink]="['/page/room-display', item.id]"
+          >View details<mat-icon>keyboard_arrow_right</mat-icon></a
+        >
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

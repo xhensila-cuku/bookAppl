@@ -1,0 +1,39 @@
+<section class="nav-container">
+    <nav class="main-nav">
+      <div class="first-part">
+        <a class="main-link" (click)="onToggleDetails()">
+          <mat-icon class="icon">view_headline</mat-icon>
+        </a>
+        <ul class="main-nav-list">
+          <li>
+            <a class="main-nav-link" routerLink="guesthouses"  routerLinkActive="active-link">
+              <mat-icon class="icon">home</mat-icon>
+              @if (detailsVisible()) {
+              <span>GuestHouses <mat-icon class="no-fill">home</mat-icon></span>
+              }
+            </a>
+          </li>
+          <li>
+            <a class="main-nav-link" routerLink="users" routerLinkActive="active-link">
+              <mat-icon class="icon">people</mat-icon>
+              @if (detailsVisible()) {
+              <span>Users</span>
+              }
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="second-part">
+        <ul>
+          <li>
+            <a class="main-nav-link" (click)="logOut()">
+              <mat-icon class="icon">logout</mat-icon>
+              @if (detailsVisible()) {
+              <span>Log out</span>
+              }
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </section>

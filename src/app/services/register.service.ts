@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserRegister, UserRegisterResponse } from '../register/register.model';
-
+import { UserRegister, UserRegisterResponse } from '../models/register.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
   constructor(private http: HttpClient) {}
+  apiUrl = environment.apiUrl;
 
   signup(userData: UserRegister) {
     return this.http.post<UserRegisterResponse>(
-      'http://localhost:5157/api/Authentication/Register',
+      `${this.apiUrl}/Authentication/Register`,
       {
-        Username: userData.Username, // Adjusted mapping
+        Username: userData.Username,
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,
         password: userData.password,
-        PhoneNumber: userData.PhoneNumber, // Adjusted mapping
+        PhoneNumber: userData.PhoneNumber,
       }
     );
   }

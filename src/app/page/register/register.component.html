@@ -1,0 +1,112 @@
+<div class="wrapper">
+  @if (errorMessage) {
+  <app-register-modal (close)="onHandleError()"></app-register-modal>
+  }
+  <div class="inner">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h3>New Account?</h3>
+      <div class="form-holder">
+        <span class="lnr lnr-user"></span>
+        <label for="username" class="form-label">Username</label>
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          formControlName="Username"
+        />
+        @if(form.controls.Username.invalid && form.controls.Username.touched){
+        <p class="text-danger">This field is required</p>
+        }
+      </div>
+      <div class="form-holder">
+        <div class="row-input">
+          <div class="row-input-first">
+            <span class="lnr lnr-phone-handset"></span>
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              id="firstName"
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              required
+            />
+            @if(form.controls.firstName.invalid &&
+            form.controls.firstName.touched){
+            <p class="text-danger">This field is required</p>
+            }
+          </div>
+          <div class="row-input-second">
+            <span class="lnr lnr-phone-handset"></span>
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              id="lastName"
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              required
+            />
+            @if(form.controls.lastName.invalid &&
+            form.controls.lastName.touched){
+            <p class="text-danger">This field is required</p>
+            }
+          </div>
+        </div>
+        <div>
+          <span class="lnr lnr-phone-handset"></span>
+          <label for="PhoneNumber" class="form-label">Phone Number</label>
+          <input
+            id="PhoneNumber"
+            type="text"
+            class="form-control"
+            formControlName="PhoneNumber"
+            required
+          />
+          @if(form.controls.PhoneNumber.invalid &&
+          form.controls.PhoneNumber.touched){
+          <p class="text-danger">This field is required</p>
+          }
+        </div>
+      </div>
+      <div class="form-holder">
+        <span class="lnr lnr-envelope"></span>
+        <label for="email" class="form-label">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          email
+          required
+        />
+        @if(form.controls.email.invalid && form.controls.email.touched){
+        <p class="text-danger">This field is required</p>
+        }
+      </div>
+      <div class="form-holder">
+        <span class="lnr lnr-lock"></span>
+        <label for="password" class="form-label">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          formControlName="password"
+          required
+        />
+        @if (form.controls.password.invalid && form.controls.password.touched) {
+          <p class="text-danger">
+            Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and at least 6 characters
+          </p>
+        }
+      </div>
+
+      <div class="button-container">
+        <button (click)="onLogin()">
+          <span>Back To Login</span>
+        </button>
+        <button type="submit">
+          <span>Register</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

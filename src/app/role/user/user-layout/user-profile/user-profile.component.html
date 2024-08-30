@@ -1,0 +1,27 @@
+<div class="background-photo">
+  <app-nav-bar />
+</div>
+<div class="all-components padding">
+  <div>
+    <h3 class="main-title">User Details</h3>
+    <div class="information">
+      <div class="tabs">
+        <button
+          class="personal-details links"
+          [routerLink]="['/page/my-profile/personal-details']"
+          routerLinkActive="active-link"
+        >
+          Personal details
+        </button>
+        <button
+          class="bokkings links"
+          [routerLink]="['/page/my-profile/bookings']"
+          routerLinkActive="active-link"
+        >
+          Bookings
+        </button>
+      </div>
+      <router-outlet />
+    </div>
+  </div>
+</div>

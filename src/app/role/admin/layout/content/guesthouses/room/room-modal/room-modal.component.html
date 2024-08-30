@@ -1,0 +1,116 @@
+<div class="backdrop">
+  <div class="alert-box">
+    <div class="to-end">
+      <button class="btn" (click)="close()"><mat-icon>clear</mat-icon></button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="simple-form">
+      <p>
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="title" name="name" formControlName="name" class="form-control"/>
+        @if(form.controls.name.invalid && form.controls.name.touched ){
+        <span class="text-danger ">This field is required</span>
+        }
+      </p>
+
+      <p>
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          rows="3"
+          name="description"
+          formControlName="description"
+          class="form-control"
+        ></textarea>
+        @if(form.controls.description.invalid &&
+        form.controls.description.touched){
+        <span class="text-danger">This field is required</span>
+        }
+      </p>
+      <p>
+        <label for="image" class="form-label">Image</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          class="form-control image-form-control"
+          (change)="onFileChange($event)"
+        />
+        @if(form.controls.image.invalid && form.controls.image.touched){
+        <span class="text-danger">This field is required</span>
+        }
+      </p>
+      <div class="same-row">
+        <p>
+          <label for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            formControlName="price"
+          />
+        </p>
+        <p class="with-margin">
+          <label for="numberOfBeds">No of beds</label>
+          <input
+            type="number"
+            id="numberOfBeds"
+            name="numberOfBeds"
+            formControlName="numberOfBeds"
+          />
+       
+        </p>
+        <!-- <p>
+          <label for="guestHouseId">GuestHouse Id</label>
+          <input
+            type="string"
+            readonly
+            id="guestHouseId"
+            name="guestHouseId"
+            formControlName="guestHouseId"
+          />
+        </p> -->
+      </div>
+
+      <!-- <div>
+        <ngx-select-dropdown
+          [config]="config"
+          [options]="types"
+          formControlName="amenities"
+          class="selection">
+        </ngx-select-dropdown>
+      </div> -->
+      <div class="form-group">
+        <label>Amenities</label>
+        <ngx-select-dropdown
+          [multiple]="true"
+          [config]="config"
+          [options]="types"
+          formControlName="amenities"
+          (change)="onSelectChange($event)"
+        ></ngx-select-dropdown>
+      </div>
+      
+        <!-- <mat-form-field>
+          <mat-label>Ameneties</mat-label>
+          <mat-select
+            [panelClass]="'custom-panel'"
+            formControlName="amenities"
+            multiple
+            class="selection"
+          >
+            @for(item of types; track item){
+            <mat-option [value]="item" class="options">{{ item }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field> -->
+      
+
+      <div class="buttons">
+        <div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

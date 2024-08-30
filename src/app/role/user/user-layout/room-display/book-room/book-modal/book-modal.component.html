@@ -1,0 +1,48 @@
+
+<div class="backdrop">
+    <div class="alert-box">
+      <div class="to-end">
+        <button class="btn " (click)="close()"><mat-icon>clear</mat-icon></button>
+      </div>
+      
+      <div class="booking-box" id="booking-box">
+        <h3>Book this room for {{ data?.price }}$ /per night</h3>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="simple-form">
+          <div class="inputs">
+            <label for="check-in">Check in</label>
+            <input
+              id="check-in"
+              type="date"
+              [min]="today"
+              required
+              class="form-control"
+              formControlName="checkIn"
+            />
+            @if(form.controls.checkIn.invalid&&form.controls.checkIn.touched){
+              <p class="text-danger">check In is required</p>
+            }
+          </div>
+          <div class="inputs">
+            <label for="check-out">Check out</label>
+            <input
+              id="check-out"
+              type="date"
+              [min]="form.value.checkIn || today"
+              required
+              class="form-control"
+              formControlName="checkOut"
+            />
+            @if(form.controls.checkOut.invalid&&form.controls.checkOut.touched){
+              <p class="text-danger">check In is required</p>
+            }
+          </div>
+          <div  class="d-flex justify-content-end"><button class="btn btn-primary" type="submit">Add</button></div>
+        </form>
+        @if (errorMessages) {
+          <div class="error-message">
+            <p>{{ errorMessages }}</p>
+          </div>
+        }
+    </div>
+  </div>
+  

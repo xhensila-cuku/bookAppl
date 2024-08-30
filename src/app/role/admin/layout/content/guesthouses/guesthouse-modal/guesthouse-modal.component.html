@@ -1,0 +1,46 @@
+<div class="backdrop">
+    <div class="alert-box">
+      <div class="to-end">
+        <button class="btn" (click)="close()"><mat-icon>clear</mat-icon></button>
+      </div>
+  
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="simple-form">
+        <div class="form-group">
+          <label for="name" class="form-label">Name</label>
+          <input
+            class="form-control"
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+            required
+          />
+          @if (form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)) {
+            <div class="text-danger">Name is required</div>
+          }
+        </div>
+  
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="5"
+            name="description"
+            formControlName="description"
+            required
+          ></textarea>
+          @if (form.controls.description.invalid && (form.controls.description.dirty || form.controls.description.touched)) {
+            <div class="text-danger">Description is required</div>
+          }
+        </div>
+  
+        <div class="buttons">
+          <div>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
