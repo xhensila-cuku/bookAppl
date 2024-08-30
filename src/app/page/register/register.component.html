@@ -28,7 +28,6 @@
               type="text"
               class="form-control"
               formControlName="firstName"
-              required
             />
             @if(form.controls.firstName.invalid &&
             form.controls.firstName.touched){
@@ -43,7 +42,6 @@
               type="text"
               class="form-control"
               formControlName="lastName"
-              required
             />
             @if(form.controls.lastName.invalid &&
             form.controls.lastName.touched){
@@ -59,7 +57,6 @@
             type="text"
             class="form-control"
             formControlName="PhoneNumber"
-            required
           />
           @if(form.controls.PhoneNumber.invalid &&
           form.controls.PhoneNumber.touched){
@@ -76,7 +73,6 @@
           class="form-control"
           formControlName="email"
           email
-          required
         />
         @if(form.controls.email.invalid && form.controls.email.touched){
         <p class="text-danger">This field is required</p>
@@ -90,17 +86,17 @@
           type="password"
           class="form-control"
           formControlName="password"
-          required
         />
         @if (form.controls.password.invalid && form.controls.password.touched) {
-          <p class="text-danger">
-            Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and at least 6 characters
-          </p>
+        <p class="text-danger">
+          Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non
+          alphanumeric and at least 6 characters
+        </p>
         }
       </div>
 
       <div class="button-container">
-        <button (click)="onLogin()">
+        <button (click)="onLogin()" type="button">
           <span>Back To Login</span>
         </button>
         <button type="submit">

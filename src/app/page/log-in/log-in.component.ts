@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -5,16 +7,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { UserDto } from '../../models/login.model';
-import { CommonModule } from '@angular/common';
-import { AlertModalComponent } from './alert-modal/alert-modal.component';
-import { UserService } from '../../services/user.service';
-import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../core/services/auth.service';
+import { LoginService } from '../../core/services/login.service';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -31,14 +27,14 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent {
   form: FormGroup;
   errorMessage: string | null = null;
-  // userApi='http://localhost:5157/api/Authentication/Login';
+
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
     private authService: AuthService,
-    private loginService: LoginService // private userService: UserService
+    private loginService: LoginService 
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -46,21 +42,21 @@ export class LoginComponent {
     });
   }
 
-  get emailIsInvalid() {
-    return (
-      this.form.controls['email'].touched &&
-      this.form.controls['email'].dirty &&
-      this.form.controls['email'].invalid
-    );
-  }
+  // get emailIsInvalid() {
+  //   return (
+  //     this.form.controls['email'].touched &&
+  //     this.form.controls['email'].dirty &&
+  //     this.form.controls['email'].invalid
+  //   );
+  // }
 
-  get passwordIsInvalid() {
-    return (
-      this.form.controls['password'].touched &&
-      this.form.controls['password'].dirty &&
-      this.form.controls['password'].invalid
-    );
-  }
+  // get passwordIsInvalid() {
+  //   return (
+  //     this.form.controls['password'].touched &&
+  //     this.form.controls['password'].dirty &&
+  //     this.form.controls['password'].invalid
+  //   );
+  // }
 
   onSubmit() {
     if (this.form.invalid) {

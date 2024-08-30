@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from './page/log-in/log-in.component';
-import { MatIconModule } from '@angular/material/icon';
-
-import { SelectDropDownModule } from 'ngx-select-dropdown';
-import { HeaderComponent } from './role/admin/layout/header/header.component';
-import { SidebarComponent } from './role/admin/layout/side-bar/side-bar.component';
-import { GuestHousesComponent } from './role/admin/layout/content/guesthouses/guesthouses.component';
-import { AdminComponent } from './role/admin/admin.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component'; 
+import { GuesthousesTableComponent } from './page/guesthouses-table/guesthouses-table.component';
+import { HeaderComponent } from './layouts/admin-layout/components/header/header.component';
+import { SidebarComponent } from './layouts/admin-layout/components/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +16,10 @@ import { AdminComponent } from './role/admin/admin.component';
     LoginComponent,
     SidebarComponent,
     MatIconModule,
-    GuestHousesComponent,
-    AdminComponent,
+    GuesthousesTableComponent,
+    AdminLayoutComponent,
   ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  template: ` <router-outlet />`,
 })
 export class AppComponent {
   title = 'Guesthouse';

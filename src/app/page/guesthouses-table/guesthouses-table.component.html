@@ -1,0 +1,63 @@
+@if (errorMessage) {
+<div class="alert">
+  {{ errorMessage }}
+</div>
+}
+
+<div class="all-section">
+  <div>
+    <h1>Guest Houses</h1>
+    <button class="new-button" (click)="onNewGuestHouse()">
+      Add <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="table-section">
+    <table class="second-table">
+      <thead class="head-table">
+        <tr class="second-table-row head-row">
+          <!-- <td class="second-table-head">Rooms</td> -->
+          <!-- <td class="second-table-head">GuestHouse Id</td> -->
+          <td class="second-table-head">Name</td>
+          <td class="second-table-head">Description</td>
+          <td class="second-table-head">Product Details</td>
+        </tr>
+      </thead>
+      <tbody>
+        @for( guesthouse of guestHouses | slice: (page-1)*pageSize:
+        page*pageSize; track guesthouse.id){
+
+        <tr class="second-table-row">
+          <!-- <td class="second-table-col" (click)="goToRooms(guesthouse.id)"> -->
+          <!-- <button class="button-text">Room<mat-icon>keyboard_arrow_right</mat-icon></button> -->
+          <!-- </td> -->
+          <!-- <td class="second-table-col">{{ guesthouse.id }}</td> -->
+          <td class="second-table-col">{{ guesthouse.name }}</td>
+          <td class="second-table-col">{{ guesthouse.description }}</td>
+          <td class="second-table-col">
+            <div class="buttons">
+              <button class="third-button" (click)="goToRooms(guesthouse.id)">
+                <mat-icon class="icon">home</mat-icon>
+              </button>
+              <button class="first-button" (click)="onEdit(guesthouse)">
+                <mat-icon class="icon">edit</mat-icon></button
+              ><button class="second-button" (click)="onDelete(guesthouse.id)">
+                <mat-icon class="icon">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <ngb-pagination
+      [collectionSize]="collectionSize"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+    />
+  </div>
+</div>

@@ -7,9 +7,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RegisterService } from '../../services/register.service';
-import { AlertModalComponent } from '../log-in/alert-modal/alert-modal.component';
-import { RegisterModalComponent } from './register-modal/register-modal.component';
+import { RegisterService } from '../../core/services/register.service';
+import { AlertModalComponent } from '../log-in/components/alert-modal/alert-modal.component';
+import { RegisterModalComponent } from './components/register-modal/register-modal.component';
 
 @Component({
   selector: 'app-register',

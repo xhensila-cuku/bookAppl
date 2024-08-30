@@ -1,0 +1,38 @@
+<div class="background-photo">
+  <!-- <app-nav-bar /> -->
+</div>
+@if(isFetching()){
+<div class="d-flex justify-content-center m-5">
+  <div class="spinner-border" role="status">
+    <!-- <span class="sr-only">Loading...</span> -->
+  </div>
+</div>
+}@else {
+
+<header>
+  <div class="overlay">
+    <span>All Guesthouses</span>
+  </div>
+</header>
+<div class="container">
+  @for(item of guestHouses; let i=$index; track item.id){
+
+  <div
+    class="serviceBox"
+    [ngStyle]="{ 'background-image': getBackgroundImage(i) }"
+  >
+    <div class="serviceContent">
+      <p class="title">{{ item.name }}</p>
+      <span class="description">{{ item.description }}</span>
+      <p>
+        <a class="details" [routerLink]="['/page/room-details', item.id]"
+          >View details<mat-icon>keyboard_arrow_right</mat-icon></a
+        >
+      </p>
+    </div>
+  </div>
+
+  }
+</div>
+
+}

@@ -1,29 +1,22 @@
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './page/log-in/log-in.component';
-import { AuthGuard } from './guards/auth.guard';
-import { AdminGuard } from './guards/admin.guard';
-import { NoAuthGuard } from './guards/no-auth.guard';
-import { UserGuard } from './guards/user.guard';
-// import { BookingsComponent } from './user/user-layout/user-profile/bookings/bookings.component';
-// import { AdminComponent } from './admin/admin.component';
-// import { UserComponent } from './user/user.component';
-// import { RegisterComponent } from './register/register.component';
-// import { GuestHousesComponent } from './admin/components/modal/guest-houses/guest-houses.component';
-// import { RoomComponent } from './admin/components/modal/guest-houses/room/room/room.component';
-// import { UsersComponent } from './admin/components/users/users.component';
-// import { AllGuesthousesComponent } from './user/user-layout/top-five/all-guesthouses/all-guesthouses.component';
-// import { RoomDisplayComponent } from './user/user-layout/room-display/room-display.component';
-// import { BookRoomComponent } from './user/user-layout/room-display/book-room/book-room.component';
-// import { UserProfileComponent } from './user/user-layout/user-profile/user-profile.component';
-// import { PersonalDetailsComponent } from './user/user-layout/user-profile/personal-details/personal-details.component';
-// import { NoTabComponent } from './user/user-layout/user-profile/no-tab/no-tab.component';
+import { Routes } from '@angular/router';
+import { AdminGuard } from './core/guards/admin.guard';
+import { AuthGuard } from './core/guards/auth.guard';
+import { NoAuthGuard } from './core/guards/no-auth.guard';
+import { UserGuard } from './core/guards/user.guard';
+
 
 export const routes: Routes = [
-  { path: 'login', canActivate: [NoAuthGuard], component: LoginComponent },
+  { path: 'login', canActivate: [NoAuthGuard], 
+    loadComponent: () =>
+      import('./page/log-in/log-in.component').then(
+        (x) => x.LoginComponent
+      ), },
   {
     path: 'admin',
     loadComponent: () =>
-      import('./role/admin/admin.component').then((x) => x.AdminComponent),
+      import('./layouts/admin-layout/admin-layout.component').then(
+        (x) => x.AdminLayoutComponent
+      ),
     canActivate: [AuthGuard, AdminGuard],
     data: { roles: ['Admin'] },
     children: [
@@ -35,23 +28,23 @@ export const routes: Routes = [
       {
         path: 'guesthouses',
         loadComponent: () =>
-          import('./role/admin/layout/content/guesthouses/guesthouses.component').then(
-            (x) => x.GuestHousesComponent
+          import('./page/guesthouses-table/guesthouses-table.component').then(
+            (x) => x.GuesthousesTableComponent
           ),
       },
       {
         path: 'room/:guesthouseId',
         loadComponent: () =>
-          import(
-            './role/admin/layout/content/guesthouses/room/room.component'
-          ).then((x) => x.RoomComponent),
+          import('./page/rooms-table/rooms-table.component').then(
+            (x) => x.RoomsTableComponent
+          ),
         // component: RoomComponent,
       },
       {
         path: 'users',
         loadComponent: () =>
-          import('./role/admin/layout/content/users/users.component').then(
-            (x) => x.UsersComponent
+          import('./page/users-table/users-table.component').then(
+            (x) => x.UsersTableComponent
           ),
         // component: UsersComponent,
       },
@@ -60,71 +53,75 @@ export const routes: Routes = [
   {
     path: 'page',
     loadComponent: () =>
-      import('./role/user/user.component').then((x) => x.UserComponent),
+      import('./layouts/user-layout/user-layout.component').then(
+        (x) => x.UserLayoutComponent
+      ),
     // component: UserComponent,
     canActivate: [AuthGuard, UserGuard],
     data: { roles: ['User'] },
-  },
-  {
-    path: 'page/all-guesthouses',
-    canActivate: [AuthGuard, UserGuard],
-    loadComponent: () =>
-      import(
-        './role/user/user-layout/top-five/all-guesthouses/all-guesthouses.component'
-      ).then((x) => x.AllGuesthousesComponent),
-    // component: AllGuesthousesComponent,
-  },
-  {
-    path: 'page/room-display/:guestHouseId',
-    canActivate: [AuthGuard, UserGuard],
-    loadComponent: () =>
-      import(
-        './role/user/user-layout/room-display/room-display.component'
-      ).then((x) => x.RoomDisplayComponent),
-    // component: RoomDisplayComponent,
-  },
-  {
-    path: 'page/book/:roomId',
-    canActivate: [AuthGuard, UserGuard],
-    loadComponent: () =>
-      import(
-        './role/user/user-layout/room-display/book-room/book-room.component'
-      ).then((x) => x.BookRoomComponent),
-    // component: BookRoomComponent,
-  },
-  {
-    path: 'page/my-profile',
-    loadComponent: () =>
-      import(
-        './role/user/user-layout/user-profile/user-profile.component'
-      ).then((x) => x.UserProfileComponent),
-    // component: UserProfileComponent,
-    canActivate: [AuthGuard, UserGuard],
-
     children: [
       {
         path: '',
         loadComponent: () =>
-          import(
-            './role/user/user-layout/user-profile/no-tab/no-tab.component'
-          ).then((x) => x.NoTabComponent),
-        // component: NoTabComponent,
+          import('./page/home/home.component').then((x) => x.HomeComponent),
       },
       {
-        path: 'personal-details',
+        path: 'all-guesthouses',
         loadComponent: () =>
           import(
-            './role/user/user-layout/user-profile/personal-details/personal-details.component'
-          ).then((x) => x.PersonalDetailsComponent),
-        // component: PersonalDetailsComponent,
+            './page/all-guesthouses-card-list/all-guesthouses-card-list.component'
+          ).then((x) => x.AllGuesthousesCardListComponent),
+        // component: AllGuesthousesComponent,
       },
       {
-        path: 'bookings',
+        path: 'room-details/:guestHouseId',
         loadComponent: () =>
-          import(
-            './role/user/user-layout/user-profile/bookings/bookings.component'
-          ).then((x) => x.BookingsComponent),
-        // component: BookingsComponent,
+          import('./page/room-details/room-details.component').then(
+            (x) => x.RoomDetailsComponent
+          ),
+        // component: RoomDisplayComponent,
+      },
+      {
+        path: 'book/:roomId',
+        loadComponent: () =>
+          import('./page/book-room/book-room.component').then(
+            (x) => x.BookRoomComponent
+          ),
+        // component: BookRoomComponent,
+      },
+      {
+        path: 'my-profile',
+        loadComponent: () =>
+          import('./page/user-profile/user-profile.component').then(
+            (x) => x.UserProfileComponent
+          ),
+        // component: UserProfileComponent,
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './page/user-profile/components/no-tab/no-tab.component'
+              ).then((x) => x.NoTabComponent),
+            // component: NoTabComponent,
+          },
+          {
+            path: 'personal-details',
+            loadComponent: () =>
+              import(
+                './page/user-profile/components/personal-details/personal-details.component'
+              ).then((x) => x.PersonalDetailsComponent),
+            // component: PersonalDetailsComponent,
+          },
+          {
+            path: 'bookings',
+            loadComponent: () =>
+              import(
+                './page/user-profile/components/bookings/bookings.component'
+              ).then((x) => x.BookingsComponent),
+            // component: BookingsComponent,
+          },
+        ],
       },
     ],
   },
