@@ -12,13 +12,12 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class SidebarComponent {
   detailsVisible = signal(true);
-  onToggleDetails() {
-    this.detailsVisible.update((wasVisible) => !wasVisible);
-  }
   constructor(private authService: AuthService) {}
-
   logOut() {
     this.authService.logout();
     console.log('Logged out successfully');
+  }
+  onToggleDetails() {
+    this.detailsVisible.update((wasVisible) => !wasVisible);
   }
 }

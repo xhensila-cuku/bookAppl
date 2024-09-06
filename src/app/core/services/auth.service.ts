@@ -8,13 +8,7 @@ export class AuthService {
   private isAuthenticated = false;
   private userRoles: string[] = [];
   constructor(private router: Router) {
-    if (this.isBrowser()) {
-      this.loadSession();
-    }
-  }
-
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+    this.loadSession();
   }
 
   private loadSession(): void {
@@ -27,18 +21,15 @@ export class AuthService {
   }
 
   login(roles: string[]): void {
-    if (this.isBrowser()) {
-      this.isAuthenticated = true;
-      this.userRoles = roles;
-      localStorage.setItem('roles', JSON.stringify(roles));
-    }
+    this.isAuthenticated = true;
+    this.userRoles = roles;
+    localStorage.setItem('roles', JSON.stringify(roles));
   }
 
   logout(): void {
-    // if (this.isBrowser()) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('roles');
-    // }
+    localStorage.removeItem('token');
+    localStorage.removeItem('roles');
+
     this.isAuthenticated = false;
     this.userRoles = [];
     this.router.navigate(['/login']);
@@ -47,11 +38,6 @@ export class AuthService {
   getIsAuthenticated(): boolean {
     return this.isAuthenticated;
   }
-
-  // getUserRoles(): string[] {
-  //   return this.userRoles;
-  // }
-
   checkUserRole(role: string): boolean {
     return this.userRoles.includes(role);
   }

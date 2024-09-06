@@ -1,20 +1,18 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalService } from '../../../../core/services/modal.service'; 
-import { MatIconModule } from '@angular/material/icon';
-import { Rooms } from '../../../../core/models/room.model'; 
-import { fileToBase64Fn } from '../../../../shared/utils/filteToBase64Fn'; 
-import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { Rooms } from '../../../../core/models/room.model';
+import { ModalService } from '../../../../core/services/modal.service';
+import { fileToBase64Fn } from '../../../../shared/utils/filteToBase64Fn';
 
 @Component({
   selector: 'app-modal',
@@ -29,7 +27,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
   templateUrl: './room-modal.component.html',
   styleUrl: './room-modal.component.css',
 })
-export class RoomModalComponent {
+export class RoomModalComponent implements OnInit {
   selectionChanged($event: Event) {
     throw new Error('Method not implemented.');
   }
@@ -162,11 +160,5 @@ export class RoomModalComponent {
   onSelectChange(event: any) {
     console.log('Selected:', event);
   }
-  // config = {
-  //   search: true,
-  //   height: 'auto',
-  //   placeholder: 'Select Amenities',
-  //   multiple: true,
-  //   selectAll: true
-  // };
+
 }

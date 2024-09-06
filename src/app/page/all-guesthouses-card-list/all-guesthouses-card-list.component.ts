@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, Router } from '@angular/router';
 import { GuestHouses } from '../../core/models/guestHouses.model';
@@ -12,7 +12,7 @@ import { GuestHousesService } from '../../core/services/guest-houses.service';
   templateUrl: './all-guesthouses-card-list.component.html',
   styleUrl: './all-guesthouses-card-list.component.css',
 })
-export class AllGuesthousesCardListComponent {
+export class AllGuesthousesCardListComponent implements OnInit {
   isFetching = signal(false);
   backgroundImages = [
     'url("assets/hotel-1.jpg")',
@@ -29,9 +29,6 @@ export class AllGuesthousesCardListComponent {
     'url("assets/hotel-14.jpeg")',
   ];
 
-  getBackgroundImage(index: number): string {
-    return this.backgroundImages[index % this.backgroundImages.length];
-  }
   guestHouseId!: string;
   guestHouses: GuestHouses[] = [];
   constructor(
@@ -45,11 +42,15 @@ export class AllGuesthousesCardListComponent {
   loadGuesthouses() {
     this.guestHouseService.getAllGuestHOuses().subscribe({
       next: (response) => {
-        console.log(response), (this.guestHouses = response);
+        console.log(response); 
+        this.guestHouses = response;
       },
       complete: () => {
         this.isFetching.set(false);
       },
     });
+  }
+  getBackgroundImage(index: number): string {
+    return this.backgroundImages[index % this.backgroundImages.length];
   }
 }

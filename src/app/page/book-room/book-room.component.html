@@ -49,42 +49,8 @@
       </div>
     </div>
   </div>
-  <!-- <div class="position-booking-box"> -->
-    <!-- <div>
-      <h3>Mini-gallery</h3>
-      <img src="assets/hotel-1.jpg" />
-      <img src="assets/hotel-2.jpg" />
-      <img src="assets/hotel-3.jpg" />
-      <img src="assets/hotel-4.jpg" />
-  
-    </div> -->
-    <!-- <div class="booking-box" id="booking-box">
-      <h3>{{ room?.price }}$ /per night</h3>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="inputs">
-          <label for="check-in">Check in</label>
-          <input
-            id="check-in"
-            type="date"
-            required
-            formControlName="checkIn"
-            [min]="today"
-          />
-        </div>
-        <div class="inputs">
-          <label for="check-out">Check out</label>
-          <input
-            id="check-out"
-            type="date"
-            [min]="form.value.checkIn || today"
-            required
-            formControlName="checkOut"
-          />
-        </div>
-        <div><button class="button-book" type="submit">Add</button></div>
-      </form>
-    </div> -->
-  <!-- </div> -->
+  @if (message) {
+    <p class="alerts">{{message}}</p>
+  }
 </div>
-
 }

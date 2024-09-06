@@ -1,11 +1,9 @@
 
-<div class="background-photo">
-  <!-- <app-nav-bar /> -->
-</div>
+
 @if(isFetching()){
   <div class="d-flex justify-content-center m-5">
     <div class="spinner-border" role="status">
-      <!-- <span class="sr-only">Loading...</span> -->
+
     </div>
   </div>
 }@else {
@@ -15,21 +13,13 @@
       <span>Accommodations</span>
   </div>
 </header>
+<div class="body">
 
-@for(item of rooms; track item.id){
-  <div id="container">
+  @for(item of rooms; track item.id){
+    <div id="container">
   <div class="product-details">
     <div class="room-header"></div>
     <h1>{{ item.name }}</h1>
-    <!-- <div>
-      <span class="hint-star star">
-        <mat-icon class="fa fa-star" aria-hidden="true">star</mat-icon>
-        <mat-icon class="fa fa-star" aria-hidden="true">star</mat-icon>
-        <mat-icon class="fa fa-star" aria-hidden="true">star</mat-icon>
-        <mat-icon class="fa fa-star" aria-hidden="true">star</mat-icon>
-        <mat-icon class="fa fa-star-o" aria-hidden="true">star</mat-icon>
-      </span>
-    </div> -->
     <p class="information">{{ item.description }}</p>
     <div class="control">
       <button class="btn">
@@ -41,7 +31,7 @@
       </button>
     </div>
   </div>
-
+  
   <div class="product-image">
     <img [src]="'data:image/jpeg;base64,' + item.image"  />
 
@@ -62,4 +52,5 @@
   </div>
 </div>
 }
+</div>
 }

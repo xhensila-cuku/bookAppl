@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Users } from '../../../../core/models/users.model';
 import { UserService } from '../../../../core/services/user.service';
 
@@ -6,10 +6,10 @@ import { UserService } from '../../../../core/services/user.service';
   selector: 'app-no-tab',
   standalone: true,
   imports: [],
-  templateUrl: './no-tab.component.html',
-  styleUrl: './no-tab.component.css',
+  templateUrl: './no-selected-option.component.html',
+  styleUrl: './no-selected-option.component.css',
 })
-export class NoTabComponent {
+export class NoSelectedOptionComponent implements OnInit{
   userId: string | null = null;
   isEditing: boolean = false;
   user!: Users;

@@ -37,7 +37,7 @@
                     />
                     @if (form.controls.bookFrom.invalid &&
                     form.controls.bookFrom.touched){
-                    <span class="text-danger">This field is required!</span>
+                    <div class="text-danger">This field is required!</div>
                     }
                   </div>
                 </div>
@@ -61,11 +61,11 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <span class="form-label">Number of Beds</span>
+                    <label class="form-label">Number of Beds</label>
                     <input
                       class="form-control"
                       type="number"
-                      required
+                      [min]="1"
                       [max]="3"
                       formControlName="numberOfBeds"
                     />
@@ -73,12 +73,15 @@
                     form.controls.numberOfBeds.touched){
                     <div class="text-danger">This field is required!</div>
                     }
-                    <span class="select-arrow"></span>
                   </div>
                 </div>
               </div>
               <div class="form-btn">
-                <button class="submit-btn" type="submit">
+                <button
+                  class="submit-btn"
+                  type="submit"
+                  (click)="scrollToGuesthouses()"
+                >
                   Check availability
                 </button>
               </div>

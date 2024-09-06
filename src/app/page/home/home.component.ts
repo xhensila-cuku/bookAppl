@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { GuestHouses } from '../../core/models/guestHouses.model';
 import { GuestHousesService } from '../../core/services/guest-houses.service';
-import { TopFiveComponent } from "./components/top-five/top-five.component";
+import { TopFiveComponent } from './components/top-five/top-five.component';
 
 @Component({
   selector: 'app-home',
@@ -18,16 +18,16 @@ import { TopFiveComponent } from "./components/top-five/top-five.component";
   imports: [ReactiveFormsModule, RouterLink, MatIconModule, TopFiveComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
-export class HomeComponent {
-  form!: FormGroup;
+export class HomeComponent implements OnInit {
+  form: FormGroup;
   userId!: string;
   today!: string;
   errorMessage?: string;
   isFetching = signal(false);
-  @ViewChild('guesthouses') guesthousesSection!: ElementRef;
-
+  @ViewChild('guesthouses') guesthousesSection?: ElementRef;
+  
   bookings: GuestHouses[] = [];
   constructor(
     private fb: FormBuilder,
@@ -48,14 +48,14 @@ export class HomeComponent {
     const currentDate = new Date();
     this.today = this.datePipe.transform(currentDate, 'yyyy-MM-dd')!;
   }
-
+  
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+    
     this.isFetching.set(true);
-
     const formattedCheckIn = this.datePipe.transform(
       this.form.value.bookTo,
       'MM/dd/yy'
@@ -71,27 +71,30 @@ export class HomeComponent {
       bookTo: formattedCheckOut || '',
     };
     this.guesthousesService
-      .getAllGuestHousesByDate(
-        newBook.bookFrom,
-        newBook.bookTo,
-        newBook.numberOfBeds
-      )
+    .getAllGuestHousesByDate(
+      newBook.bookFrom,
+      newBook.bookTo,
+      newBook.numberOfBeds
+    )
       .subscribe({
         next: (response) => {
           console.log(response);
           this.bookings = response;
-          this.scrollToGuesthouses();
         },
         error: (error) => {
           console.error('Error:', error);
           this.errorMessage = 'Fetching available guesthouses failed';
         },
-        complete: () =>
-          console.log('Fetching all available guesthouses completed'),
+        complete: () => {
+          this.isFetching.set(false);
+          console.log('Fetching all available guesthouses completed');
+        },
       });
-  }
+      this.form.reset();
+    }
+    
   scrollToGuesthouses() {
-    this.guesthousesSection.nativeElement.scrollIntoView({
+    this.guesthousesSection?.nativeElement.scrollIntoView({
       behavior: 'smooth',
     });
   }

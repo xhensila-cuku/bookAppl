@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { GuestHouses } from '../../core/models/guestHouses.model';
@@ -23,9 +23,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './guesthouses-table.component.html',
   styleUrl: './guesthouses-table.component.css',
 })
-export class GuesthousesTableComponent {
+export class GuesthousesTableComponent implements OnInit{
   guestHouseId: string | null = null;
   errorMessage: string | null = null;
+  message: string| null=null;
   constructor(
     private guestHouseService: GuestHousesService,
     private modalService: NgbModal,
@@ -54,6 +55,7 @@ export class GuesthousesTableComponent {
       .then((result: GuestHouses) => {
         if (result) {
           this.guestHouses.push(result);
+          this.showMessage('GuestHouse added successfully');
         }
       })
       .catch((error) => {
@@ -79,6 +81,7 @@ export class GuesthousesTableComponent {
               this.guestHouses[guesthouseIndex] = updatedData;
               this.errorMessage = null;
               console.log('Guesthouse Updated:', updatedData);
+              this.showMessage('GuestHouse updated successfully');
             }
           } else {
             this.showErrorMessage(
@@ -106,6 +109,7 @@ export class GuesthousesTableComponent {
             },
             complete: () => {
               console.log('Deletion completed');
+              this.showMessage('GuestHouse deleted successfully');
               this.guestHouses = this.guestHouses.filter(
                 (guesthouse) => guesthouse.id !== guesthouseId
               );
@@ -125,6 +129,12 @@ export class GuesthousesTableComponent {
   }
   get collectionSize(): number {
     return this.guestHouses.length;
+  }
+  showMessage(message: string) {
+    this.message = message;
+    setTimeout(() => {
+      this.message = '';
+    }, 4000);
   }
   showErrorMessage(message: string) {
     this.errorMessage = message;

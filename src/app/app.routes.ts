@@ -18,7 +18,6 @@ export const routes: Routes = [
         (x) => x.AdminLayoutComponent
       ),
     canActivate: [AuthGuard, AdminGuard],
-    data: { roles: ['Admin'] },
     children: [
       {
         path: '',
@@ -58,7 +57,6 @@ export const routes: Routes = [
       ),
     // component: UserComponent,
     canActivate: [AuthGuard, UserGuard],
-    data: { roles: ['User'] },
     children: [
       {
         path: '',
@@ -101,8 +99,8 @@ export const routes: Routes = [
             path: '',
             loadComponent: () =>
               import(
-                './page/user-profile/components/no-tab/no-tab.component'
-              ).then((x) => x.NoTabComponent),
+                './page/user-profile/components/no-selected-option/no-selected-option.component'
+              ).then((x) => x.NoSelectedOptionComponent),
             // component: NoTabComponent,
           },
           {

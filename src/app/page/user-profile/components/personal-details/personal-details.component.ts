@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Users } from '../../../../core/models/users.model';
 import { UserService } from '../../../../core/services/user.service';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   templateUrl: './personal-details.component.html',
   styleUrl: './personal-details.component.css',
 })
-export class PersonalDetailsComponent {
+export class PersonalDetailsComponent implements OnInit {
   userId: string | null = null;
   isEditing: boolean = false;
   user!: Users;
@@ -20,14 +20,14 @@ export class PersonalDetailsComponent {
     private authService: AuthService
   ) {}
 
-  onLogOut() {
-    this.authService.logout();
-    console.log('Logged out successfully');
-  }
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
     this.loadUser();
     console.log('User ID:', this.userId);
+  }
+  onLogOut() {
+    this.authService.logout();
+    console.log('Logged out successfully');
   }
   loadUser() {
     this.userService.getUserById(this.userId!).subscribe({

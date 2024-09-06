@@ -6,12 +6,13 @@
 }
 
 .body {
-  min-height: 90vh;
+  /* min-height: 75vh; */
   display: grid;
   place-items: center;
   background: #fff;
   font-family: "Ubuntu Mono", monospace;
   font-weight: 400;
+  padding-bottom: 2rem;
 }
 
 .container {
@@ -34,16 +35,16 @@
   background: url("/assets/hotel-2.jpg") no-repeat 50% / cover;
 }
 .container > div:nth-of-type(2) {
-  background: url("/assets/hotel-1.jpg") no-repeat 50% / cover;
+  background: url("/assets/hotel-3.jpg") no-repeat 50% / cover;
 }
 .container > div:nth-of-type(3) {
-  background: url("/assets/hotel-4.jpg") no-repeat 50% / cover;
+  background: url("/assets/hotel-1.jpg") no-repeat 50% / cover;
 }
 .container > div:nth-of-type(4) {
   background: url("/assets/hotel-5.jpeg") no-repeat 50% / cover;
 }
 .container > div:nth-of-type(5) {
-  background: url("/assets/hotel-3.jpg") no-repeat 50% / cover;
+  background: url("/assets/hotel-4.jpg") no-repeat 50% / cover;
 }
 .container > div .content {
   font-size: 0.8rem;
@@ -83,7 +84,8 @@
   background-size: cover;
 }
 .header-box {
-  padding: 2rem 0 0 2rem;
+  height: fit-content;
+  padding: 2rem 0 2rem 2rem;
 }
 
 .header-main-text {

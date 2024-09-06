@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { Rooms } from '../../core/models/room.model';
 import { RoomService } from '../../core/services/room.service';
@@ -14,16 +14,15 @@ import { NavBarComponent } from '../../layouts/user-layout/components/nav-bar/na
   templateUrl: './room-details.component.html',
   styleUrl: './room-details.component.css',
 })
-export class RoomDetailsComponent {
+export class RoomDetailsComponent implements OnInit {
   isFetching = signal(false);
   guestHouseId!: string;
   // errorMessage: string | null = null;
-
+  rooms: Rooms[] = [];
   constructor(
     private roomService: RoomService,
     private route: ActivatedRoute
   ) {}
-  rooms: Rooms[] = [];
   ngOnInit(): void {
     this.isFetching.set(true);
     this.guestHouseId = this.route.snapshot.paramMap.get('guestHouseId')!;

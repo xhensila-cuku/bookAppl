@@ -24,7 +24,6 @@ import { SidebarComponent } from './components/side-bar/side-bar.component';
         </div>
         <div class="fit-content-width">
           <router-outlet />
-          <!-- <app-guest-houses /> -->
         </div>
       </div>
     </div>

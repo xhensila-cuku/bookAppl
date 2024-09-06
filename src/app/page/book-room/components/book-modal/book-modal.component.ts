@@ -1,18 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Room } from '../../../../core/models/room.model'; 
-import { RoomService } from '../../../../core/services/room.service'; 
+import { Room } from '../../../../core/models/room.model';
+import { RoomService } from '../../../../core/services/room.service';
 import { Book } from '../../models/book-room.model';
 import { DatePipe } from '@angular/common';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
-import { UserService } from '../../../../core/services/user.service'; 
+import { UserService } from '../../../../core/services/user.service';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+function dateRangeValidator(): ValidatorFn {
+  return (group: AbstractControl): ValidationErrors | null => {
+    const checkIn = group.get('checkIn')?.value;
+    const checkOut = group.get('checkOut')?.value;
+
+    return checkOut && checkIn && checkOut <= checkIn
+      ? { invalidDateRange: true }
+      : null;
+  };
+}
 @Component({
   selector: 'app-book-modal',
   standalone: true,
@@ -21,13 +32,14 @@ import { UserService } from '../../../../core/services/user.service';
   styleUrl: './book-modal.component.css',
   providers: [DatePipe],
 })
-export class BookModalComponent {
+
+
+export class BookModalComponent implements OnInit {
   data!: Room;
-  form!: FormGroup;
+  form: FormGroup;
   today!: string;
   errorMessage!: string;
   errorMessages!: string;
-
   constructor(
     private fb: FormBuilder,
     private roomService: RoomService,
@@ -39,8 +51,7 @@ export class BookModalComponent {
       id: [''],
       roomId: [''],
       checkIn: ['', [Validators.required]],
-      checkOut: ['', [Validators.required]],
-    });
+      checkOut: ['', [Validators.required]], },{ validators: dateRangeValidator() });
   }
 
   ngOnInit() {
@@ -114,7 +125,9 @@ export class BookModalComponent {
               console.error('Error:', error);
               this.errorMessage = 'Adding new Book failed. Please try again.';
             },
-            complete: () => console.log('Adding new Book completed'),
+            complete: () =>{
+              console.log('Adding new Book completed');
+            } 
           });
         }
       },
@@ -127,7 +140,6 @@ export class BookModalComponent {
 
     this.form.reset();
   }
-
   close() {
     this.activeModal.dismiss();
   }

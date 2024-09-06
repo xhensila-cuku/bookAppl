@@ -22,5 +22,5 @@ import { SidebarComponent } from './layouts/admin-layout/components/side-bar/sid
   template: ` <router-outlet />`,
 })
 export class AppComponent {
-  title = 'Guesthouse';
+ 
 }

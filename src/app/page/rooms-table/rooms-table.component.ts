@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { NgbPaginationModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,9 +17,10 @@ import { RoomModalComponent } from './components/room-modal/room-modal.component
   templateUrl: './rooms-table.component.html',
   styleUrl: './rooms-table.component.css',
 })
-export class RoomsTableComponent {
+export class RoomsTableComponent implements OnInit{
   guestHouseId!: string;
   errorMessage: string | null = null;
+  message?: string | null;
 
   constructor(
     private roomService: RoomService,
@@ -56,6 +57,7 @@ export class RoomsTableComponent {
       .then((result) => {
         if (result) {
           this.rooms.push(result);
+          this.showMessage('Room added successfully')
         }
       })
       .catch((error) => {
@@ -71,11 +73,6 @@ export class RoomsTableComponent {
       .then((updatedData) => {
         if (updatedData) {
           console.log('Updated Data:', updatedData);
-          if (!updatedData.id) {
-            this.errorMessage =
-              'Room ID is missing. Cannot update room without an ID.';
-            return;
-          }
           const dataHasChanged =
             JSON.stringify(originalData) !== JSON.stringify(updatedData);
           if (dataHasChanged) {
@@ -86,6 +83,7 @@ export class RoomsTableComponent {
               this.rooms[roomIndex] = updatedData;
               this.errorMessage = null;
               console.log('Room Updated:', updatedData);
+              this.showMessage('Room updated successfully')
             }
           } else {
             this.showErrorMessage(
@@ -111,6 +109,7 @@ export class RoomsTableComponent {
             console.error('Error:', error);
           },
           complete: () => {
+            this.showMessage('Room deleted successfully')
             console.log('Deletion completed');
             this.rooms = this.rooms.filter((room) => room.id !== roomId);
           },
@@ -126,6 +125,12 @@ export class RoomsTableComponent {
 
     setTimeout(() => {
       this.errorMessage = '';
+    }, 4000);
+  }
+  showMessage(message: string) {
+    this.message = message;
+    setTimeout(() => {
+      this.message = '';
     }, 4000);
   }
 }

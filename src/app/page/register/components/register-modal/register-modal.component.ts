@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 export class RegisterModalComponent {
   @Output() close = new EventEmitter<void>();
 
-
   onClose(){
     this.close.emit();
   }

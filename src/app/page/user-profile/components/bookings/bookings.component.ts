@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Book } from '../../../book-room/models/book-room.model'; 
 
 import { CommonModule, DatePipe } from '@angular/common';
@@ -12,7 +12,7 @@ import { UserService } from '../../../../core/services/user.service';
   styleUrl: './bookings.component.css',
   // providers:[DatePipe],
 })
-export class BookingsComponent {
+export class BookingsComponent implements OnInit {
   userId!: string;
   isFetching = signal(false);
   bookings: Book[] = [];

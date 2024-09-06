@@ -1,5 +1,4 @@
 export interface Users{
-    
         id: string,
         userName: string,
         normalizedUserName: string,
@@ -18,5 +17,4 @@ export interface Users{
         lastName: string,
         phoneNumber: string,
         role: string,
-      
 }

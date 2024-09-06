@@ -52,7 +52,8 @@ export class ModalComponent implements OnInit {
     if (this.data) {
       this.modalService.updateGuesthouse(this.data.id, loginData).subscribe({
         next: (resData) => {
-          console.log(resData), this.activeModal.close(resData);
+          console.log(resData);
+          this.activeModal.close(resData);
         },
         error: (error) => {
           console.error('Error:', error);
@@ -65,7 +66,8 @@ export class ModalComponent implements OnInit {
 
       this.modalService.addGuesthouse(loginData).subscribe({
         next: (resData) => {
-          console.log(resData), this.activeModal.close(resData);
+          console.log(resData);
+          this.activeModal.close(resData);
         },
         error: (error) => {
           console.error('Error:', error);

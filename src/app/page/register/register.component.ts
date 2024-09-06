@@ -24,13 +24,8 @@ import { RegisterModalComponent } from './components/register-modal/register-mod
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  onLogin() {
-    this.router.navigate(['login']);
-  }
-
   form: FormGroup;
   errorMessage: string | null = null;
-
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
@@ -62,10 +57,13 @@ export class RegisterComponent {
       },
       complete: () => console.log('Registration completed'),
     });
-
+    
     this.form.reset();
   }
   onHandleError() {
     this.errorMessage = null;
+  }
+  onLogin() {
+    this.router.navigate(['login']);
   }
 }

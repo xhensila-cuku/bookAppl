@@ -50,6 +50,7 @@ header span:hover {
   justify-content: space-around;
   gap: 2rem;
   flex-wrap: wrap;
+  padding-bottom: 2rem;
 }
 
 .serviceBox {

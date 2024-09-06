@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Users } from '../../core/models/users.model';
@@ -12,7 +12,7 @@ import { UserService } from '../../core/services/user.service';
   templateUrl: './users-table.component.html',
   styleUrl: './users-table.component.css',
 })
-export class UsersTableComponent {
+export class UsersTableComponent implements OnInit{
   users: Users[] = [];
   page = 1;
   pageSize = 6;
