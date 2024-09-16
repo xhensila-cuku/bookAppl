@@ -20,6 +20,7 @@ export class BookingsComponent implements OnInit {
   pastBookings: any[] = [];
   todayBookings: any[] = [];
   upcomingBookings: any[] = [];
+  errorMessage: string| null=null;
   selectedFilter: string = 'today';
   constructor(private userService: UserService) {}
   ngOnInit() {
@@ -36,6 +37,10 @@ export class BookingsComponent implements OnInit {
         this.bookings = response;
         this.displayingBookingsByDate();
         this.applyFilter(this.selectedFilter);
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Fetching all guesthouses failed';
       },
       complete: () => {
         this.isFetching.set(false);

@@ -37,7 +37,7 @@ function dateRangeValidator(): ValidatorFn {
 export class BookModalComponent implements OnInit {
   data!: Room;
   form: FormGroup;
-  today!: string;
+  today?: string;
   errorMessage!: string;
   errorMessages!: string;
   constructor(

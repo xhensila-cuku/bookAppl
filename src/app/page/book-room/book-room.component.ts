@@ -50,6 +50,10 @@ export class BookRoomComponent implements OnInit {
         console.log(response);
         this.room = response;
       },
+      error: (error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Fetching available guesthouses failed';
+      },
       complete: () => {
         this.isFetching.set(false);
       },

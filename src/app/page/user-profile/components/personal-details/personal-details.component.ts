@@ -15,6 +15,7 @@ export class PersonalDetailsComponent implements OnInit {
   userId: string | null = null;
   isEditing: boolean = false;
   user!: Users;
+  errorMessage: string| null=null;
   constructor(
     private userService: UserService,
     private authService: AuthService
@@ -29,12 +30,20 @@ export class PersonalDetailsComponent implements OnInit {
     this.authService.logout();
     console.log('Logged out successfully');
   }
+  
   loadUser() {
     this.userService.getUserById(this.userId!).subscribe({
       next: (resData) => {
         console.log(resData);
         this.user = resData;
       },
+      error: (error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Fetching available guesthouses failed';
+      },
+      complete(){
+        console.log('User fetched successfully');
+      }
     });
   }
 
@@ -51,6 +60,9 @@ export class PersonalDetailsComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error updating user:', error);
+      },
+      complete() {
+        console.log('User updated');
       },
     });
   }

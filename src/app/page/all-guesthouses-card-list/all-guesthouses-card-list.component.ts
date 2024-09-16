@@ -14,6 +14,7 @@ import { GuestHousesService } from '../../core/services/guest-houses.service';
 })
 export class AllGuesthousesCardListComponent implements OnInit {
   isFetching = signal(false);
+  errorMessage: string | null=null;
   backgroundImages = [
     'url("assets/hotel-1.jpg")',
     'url("assets/hotel-2.jpg")',
@@ -44,9 +45,14 @@ export class AllGuesthousesCardListComponent implements OnInit {
       next: (response) => {
         console.log(response); 
         this.guestHouses = response;
+      }, 
+      error: (error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Fetching all guesthouses failed';
       },
       complete: () => {
         this.isFetching.set(false);
+        console.log('Fetched all guesthouses successfully')
       },
     });
   }

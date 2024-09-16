@@ -92,28 +92,28 @@
     </div>
   </div>
 </div>
-
-@if (bookings.length>0) {
-
-<div class="container" #guesthouses>
-  <div class="main-heading">
-    <h2>Available Guesthouses</h2>
-  </div>
-  <div class="card-container">
-    @for (item of bookings; track item.id) {
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
-        <p class="card-text">{{ item.description }} <br /></p>
-        <a class="details" [routerLink]="['/page/room-details', item.id]"
-          >View details<mat-icon>keyboard_arrow_right</mat-icon></a
-        >
+<div #guesthouses>
+  @if (bookings.length>0) {
+    
+    <div class="container" >
+      <div class="main-heading">
+        <h2>Available Guesthouses</h2>
+      </div>
+      <div class="card-container">
+        @for (item of bookings; track item.id) {
+          
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description }} <br /></p>
+              <a class="details" [routerLink]="['/page/room-details', item.id]"
+              >View details<mat-icon>keyboard_arrow_right</mat-icon></a
+              >
+            </div>
+          </div>
+        }
       </div>
     </div>
-    }
-  </div>
+  }
 </div>
-}
-
 <app-top-five />

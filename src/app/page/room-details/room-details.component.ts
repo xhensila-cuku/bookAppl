@@ -17,7 +17,7 @@ import { NavBarComponent } from '../../layouts/user-layout/components/nav-bar/na
 export class RoomDetailsComponent implements OnInit {
   isFetching = signal(false);
   guestHouseId!: string;
-  // errorMessage: string | null = null;
+  errorMessage: string | null = null;
   rooms: Rooms[] = [];
   constructor(
     private roomService: RoomService,
@@ -35,6 +35,10 @@ export class RoomDetailsComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.rooms = response;
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Fetching available guesthouses failed';
       },
       complete: () => {
         this.isFetching.set(false);

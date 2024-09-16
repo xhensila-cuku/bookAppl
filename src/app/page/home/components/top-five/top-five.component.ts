@@ -17,6 +17,7 @@ export class TopFiveComponent implements OnInit{
   guestHouseId!: string;
   guestHouses: GuestHouses[] = [];
   isFetching = signal(false);
+  errorMessage: string| null=null  
 
   constructor(
     private guestHouseService: GuestHousesService,
@@ -32,8 +33,13 @@ export class TopFiveComponent implements OnInit{
         console.log(response); 
         this.guestHouses = response;
       },
+      error: (error) => {
+        console.error('Error:', error);
+        this.errorMessage = 'Fetching top-five guesthouses failed';
+      },
       complete: () => {
         this.isFetching.set(false);
+        console.log('Fetcehed top-five guesthouses successfully');
       },
     });
   }
