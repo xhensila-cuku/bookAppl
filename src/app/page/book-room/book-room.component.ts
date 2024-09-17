@@ -65,7 +65,7 @@ export class BookRoomComponent implements OnInit {
     modalRef.result
       .then((result) => {
         if (result) {
-          this.showMessage('Room added successfully');
+          this.showMessage('Room booked successfully');
         }
       })
       .catch((error) => {
