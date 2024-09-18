@@ -45,12 +45,14 @@
           </p>
         </div>
 
-        <button class="book-now padding btn-back" (click)="onBook(room)">Book now</button>
+        <button class="book-now padding btn-back" (click)="onBook(room)">
+          Book now
+        </button>
       </div>
     </div>
   </div>
   @if (message) {
-    <p class="alerts">{{message}}</p>
+  <p class="alerts">{{ message }}</p>
   }
 </div>
 }
